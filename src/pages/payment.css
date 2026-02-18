@@ -1,0 +1,34 @@
+.success-animation {
+  margin-top: 100px;
+}
+
+.checkmark-circle {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  display: inline-block;
+}
+
+.checkmark-circle .background {
+  width: 120px;
+  height: 120px;
+  background: #4caf50;
+  border-radius: 50%;
+}
+
+.checkmark-circle .checkmark {
+  position: absolute;
+  left: 34px;
+  top: 55px;
+  width: 25px;
+  height: 50px;
+  border-right: 5px solid white;
+  border-bottom: 5px solid white;
+  transform: rotate(45deg);
+  animation: draw 0.6s ease forwards;
+}
+
+@keyframes draw {
+  0% { height: 0; width: 0; }
+  100% { height: 50px; width: 25px; }
+}

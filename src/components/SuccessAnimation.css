@@ -1,0 +1,67 @@
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.success-box {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  animation: popUp 0.4s ease-in-out;
+}
+
+@keyframes popUp {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.checkmark-circle {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin: 0 auto 20px auto;
+}
+
+.background {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #4CAF50;
+  animation: scaleCircle 0.4s ease-in-out forwards;
+}
+
+@keyframes scaleCircle {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.checkmark {
+  position: absolute;
+  left: 28px;
+  top: 40px;
+  width: 25px;
+  height: 50px;
+  border-right: 6px solid white;
+  border-bottom: 6px solid white;
+  transform: rotate(45deg) scale(0);
+  animation: drawTick 0.4s 0.3s forwards;
+}
+
+@keyframes drawTick {
+  to { transform: rotate(45deg) scale(1); }
+}

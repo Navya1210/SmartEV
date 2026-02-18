@@ -1,0 +1,279 @@
+/* ===============================
+   GLOBAL STYLING
+================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
+  min-height: 100vh;
+  padding-top: 70px; /* For fixed navbar */
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ===============================
+   NAVBAR
+================================= */
+
+.custom-navbar {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  height: 70px;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.nav-link {
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #00c6ff !important;
+}
+
+/* ===============================
+   HERO SECTION (Landing Page)
+================================= */
+
+.hero-section {
+  height: 100vh;
+  background: linear-gradient(to right, #141e30, #243b55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+/* ===============================
+   SECTIONS
+================================= */
+
+.section-dark {
+  background: #1f2c3a;
+  color: white;
+}
+
+.section-light {
+  background: #f4f6f9;
+  color: #333;
+}
+
+/* ===============================
+   MAP STYLING
+================================= */
+
+.leaflet-container {
+  height: 500px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+
+/* ===============================
+   CARD DESIGN
+================================= */
+
+.card {
+  background: #1f2c3a;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
+
+/* ===============================
+   BUTTONS
+================================= */
+
+.btn-primary {
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  border: none;
+  border-radius: 30px;
+  padding: 8px 20px;
+  transition: 0.3s ease;
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #0072ff, #00c6ff);
+}
+
+.btn-success {
+  background: linear-gradient(45deg, #00b09b, #96c93d);
+  border: none;
+  border-radius: 30px;
+  padding: 8px 20px;
+  transition: 0.3s ease;
+  color: white;
+}
+
+.btn-success:hover {
+  transform: scale(1.05);
+}
+
+.btn-contact {
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  border: none;
+  padding: 6px 15px;
+  border-radius: 20px;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.btn-contact:hover {
+  box-shadow: 0 0 15px #00c6ff;
+  transform: scale(1.05);
+}
+
+/* Glow CTA Button */
+
+.btn-glow {
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-size: 1rem;
+  transition: 0.3s ease;
+  color: white;
+}
+
+.btn-glow:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px #00c6ff;
+}
+
+/* ===============================
+   FORM INPUTS
+================================= */
+
+.form-control {
+  background: #2b3e50;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  padding: 10px;
+}
+
+.form-control:focus {
+  background: #34495e;
+  box-shadow: none;
+  border: 1px solid #00c6ff;
+  color: white;
+}
+
+/* ===============================
+   OTP SECTION
+================================= */
+
+.otp-section {
+  background: #1f2c3a;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* ===============================
+   MAP POPUP STYLING
+================================= */
+
+.leaflet-popup-content-wrapper {
+  background: #1f2c3a;
+  color: white;
+  border-radius: 15px;
+}
+
+.leaflet-popup-tip {
+  background: #1f2c3a;
+}
+
+/* ===============================
+   FOOTER
+================================= */
+
+.footer {
+  background: #111;
+  color: white;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================= */
+
+@media (max-width: 768px) {
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .leaflet-container {
+    height: 400px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ===============================
+   SCROLLBAR DESIGN
+================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2c3a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00c6ff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0072ff;
+}
