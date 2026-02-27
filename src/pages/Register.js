@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import API from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Register() {
 
@@ -14,6 +14,8 @@ function Register() {
     carType: "",
     carModel: ""
   });
+
+  const [loading, setLoading] = useState(false);
 
   const carModels = {
     Tata: ["Punch EV", "Nexon EV", "Tiago EV", "Tigor EV", "Altroz EV"],
@@ -30,85 +32,147 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await API.post("/api/auth/register", form);
-
-
-    alert("Registered Successfully ✅");
-    navigate("/");
+    try {
+      setLoading(true);
+      await API.post("/api/auth/register", form);
+      alert("Registered Successfully ✅");
+      navigate("/");
+    } catch (err) {
+      alert("Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" style={{ maxWidth: '600px' }}>
 
-      <h2 className="text-center text-white mb-4">Register</h2>
+      <div className="text-center mb-4">
+        <h1 style={{ 
+          fontSize: '2.5rem', 
+          fontWeight: '800',
+          background: 'linear-gradient(135deg, #8d9eff, #6573c3)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>
+          ⚡ Create Account
+        </h1>
+        <p style={{ color: 'rgba(197, 202, 233, 0.8)', marginTop: '10px' }}>
+          Join SmartEV and start charging smarter
+        </p>
+      </div>
 
       <form onSubmit={handleSubmit} className="card p-4">
 
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          className="form-control mb-3"
-          onChange={handleChange}
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="form-control mb-3"
-          onChange={handleChange}
-        />
-
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone Number"
-          className="form-control mb-3"
-          onChange={handleChange}
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="form-control mb-3"
-          onChange={handleChange}
-        />
-
-        {/* Car Type */}
-        <select
-          name="carType"
-          className="form-control mb-3"
-          onChange={handleChange}
-        >
-          <option value="">Select Car Brand</option>
-          <option value="Tata">Tata</option>
-          <option value="Mahindra">Mahindra</option>
-          <option value="Hyundai">Hyundai</option>
-          <option value="MG">MG</option>
-          <option value="Kia">Kia</option>
-        </select>
-
-        {/* Car Model */}
-        {form.carType && (
-          <select
-            name="carModel"
-            className="form-control mb-3"
+        <div className="mb-3">
+          <label className="form-label" style={{ fontWeight: '600' }}>Full Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter your full name"
+            className="form-control"
             onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label" style={{ fontWeight: '600' }}>Email Address</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            className="form-control"
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label" style={{ fontWeight: '600' }}>Phone Number</label>
+          <input
+            type="text"
+            name="phone"
+            placeholder="Enter your phone number"
+            className="form-control"
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label" style={{ fontWeight: '600' }}>Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Create a strong password"
+            className="form-control"
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label" style={{ fontWeight: '600' }}>Car Brand</label>
+          <select
+            name="carType"
+            className="form-control"
+            onChange={handleChange}
+            required
           >
-            <option value="">Select Car Model</option>
-            {carModels[form.carType].map((model, index) => (
-              <option key={index} value={model}>
-                {model}
-              </option>
-            ))}
+            <option value="">Select Car Brand</option>
+            <option value="Tata">Tata</option>
+            <option value="Mahindra">Mahindra</option>
+            <option value="Hyundai">Hyundai</option>
+            <option value="MG">MG</option>
+            <option value="Kia">Kia</option>
           </select>
+        </div>
+
+        {form.carType && (
+          <div className="mb-4">
+            <label className="form-label" style={{ fontWeight: '600' }}>Car Model</label>
+            <select
+              name="carModel"
+              className="form-control"
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Car Model</option>
+              {carModels[form.carType].map((model, index) => (
+                <option key={index} value={model}>
+                  {model}
+                </option>
+              ))}
+            </select>
+          </div>
         )}
 
-        <button className="btn btn-success">
-          Register
+        <button className="btn btn-success w-100 mb-3" disabled={loading}>
+          {loading ? (
+            <>
+              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Registering...
+            </>
+          ) : (
+            'Register'
+          )}
         </button>
+
+        <div className="text-center">
+          <span style={{ color: 'rgba(197, 202, 233, 0.7)' }}>
+            Already have an account?
+          </span>
+          <br />
+          <Link to="/" style={{ 
+            color: '#8d9eff', 
+            fontWeight: '600',
+            textDecoration: 'none'
+          }}>
+            Login Here →
+          </Link>
+        </div>
 
       </form>
 

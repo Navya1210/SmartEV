@@ -12,6 +12,7 @@ function Login({ setIsLoggedIn }) {
   });
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({
@@ -29,28 +30,38 @@ function Login({ setIsLoggedIn }) {
     }
 
     try {
+      setLoading(true);
       const res = await API.post("/api/auth/login", form);
 
-
-      // Save user
       localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      // Update login state
       setIsLoggedIn(true);
-
       navigate("/");
 
     } catch (err) {
       setError("Invalid Email or Password ❌");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" style={{ maxWidth: '500px' }}>
 
-      <h2 className="text-center text-white mb-4">
-        Login
-      </h2>
+      <div className="text-center mb-4">
+        <h1 style={{ 
+          fontSize: '2.5rem', 
+          fontWeight: '800',
+          background: 'linear-gradient(135deg, #8d9eff, #6573c3)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>
+          ⚡ SmartEV
+        </h1>
+        <p style={{ color: 'rgba(197, 202, 233, 0.8)', marginTop: '10px' }}>
+          Welcome back! Login to continue
+        </p>
+      </div>
 
       <form onSubmit={handleLogin} className="card p-4 shadow-lg">
 
@@ -60,35 +71,52 @@ function Login({ setIsLoggedIn }) {
           </div>
         )}
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          className="form-control mb-3"
-          value={form.email}
-          onChange={handleChange}
-        />
+        <div className="mb-3">
+          <label className="form-label" style={{ fontWeight: '600' }}>Email Address</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            className="form-control"
+            value={form.email}
+            onChange={handleChange}
+          />
+        </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          className="form-control mb-3"
-          value={form.password}
-          onChange={handleChange}
-        />
+        <div className="mb-4">
+          <label className="form-label" style={{ fontWeight: '600' }}>Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            className="form-control"
+            value={form.password}
+            onChange={handleChange}
+          />
+        </div>
 
-        <button className="btn btn-primary w-100 mb-3">
-          Login
+        <button className="btn btn-primary w-100 mb-3" disabled={loading}>
+          {loading ? (
+            <>
+              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Logging in...
+            </>
+          ) : (
+            'Login'
+          )}
         </button>
 
         <div className="text-center">
-          <span className="text-white">
+          <span style={{ color: 'rgba(197, 202, 233, 0.7)' }}>
             Don't have an account?
           </span>
           <br />
-          <Link to="/register">
-            Register Here
+          <Link to="/register" style={{ 
+            color: '#8d9eff', 
+            fontWeight: '600',
+            textDecoration: 'none'
+          }}>
+            Register Here →
           </Link>
         </div>
 

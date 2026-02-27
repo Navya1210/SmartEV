@@ -69,6 +69,8 @@ router.post("/verify-otp", async (req, res) => {
     station.availableSlots -= 1;
     await station.save();
 
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+
     const booking = new Booking({
       userId: user._id,
       stationId: station._id,
@@ -76,7 +78,8 @@ router.post("/verify-otp", async (req, res) => {
       percentToCharge,
       energyRequired,
       totalAmount,
-      profit
+      profit,
+      expiresAt
     });
 
     await booking.save();

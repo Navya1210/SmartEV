@@ -39,11 +39,18 @@ const bookingSchema = new mongoose.Schema({
     default: 0
   },
 
+  expiresAt: {
+    type: Date,
+    required: true
+  },
+
   createdAt: {
     type: Date,
     default: Date.now
   }
 
 });
+
+bookingSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 module.exports = mongoose.model("Booking", bookingSchema);

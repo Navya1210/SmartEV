@@ -25,7 +25,6 @@ function Navbar({ setIsLoggedIn }) {
     }, 200);
   };
 
-  // ✅ LOGOUT FUNCTION
   const handleLogout = () => {
     localStorage.removeItem("user");
     setIsLoggedIn(false);
@@ -36,11 +35,11 @@ function Navbar({ setIsLoggedIn }) {
     <nav className="navbar navbar-expand-lg custom-navbar fixed-top px-4">
 
       <span
-        className="navbar-brand text-white fw-bold"
+        className="navbar-brand fw-bold"
         style={{ cursor: "pointer" }}
         onClick={() => navigate("/")}
       >
-        SmartEV 
+        ⚡ SmartEV
       </span>
 
       <div className="ms-auto d-flex gap-4 align-items-center">
@@ -85,10 +84,10 @@ function Navbar({ setIsLoggedIn }) {
           Help
         </Link>
 
-        {/* ✅ LOGOUT BUTTON */}
         <button
           className="btn btn-danger btn-sm"
           onClick={handleLogout}
+          style={{ padding: '6px 18px' }}
         >
           Logout
         </button>
